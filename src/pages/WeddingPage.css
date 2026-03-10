@@ -202,6 +202,14 @@
   background: #FAF7F2;
 }
 
+.countdown-number {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.countdown-number.animate-flip {
+  transform: rotateX(360deg);
+}
+
 .countdown-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
