@@ -190,9 +190,9 @@ const WeddingPage = () => {
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <div className="hero-text fade-in-up">
-            <h1 className="hero-names">Kinga & Michał</h1>
-            <p className="hero-subtitle">Zapraszamy na nasz ślub</p>
-            <div className="hero-date">
+            <h1 className="hero-names fade-in-up">Kinga & Michał</h1>
+            <p className="hero-subtitle fade-in-up fade-in-delay-1">Zapraszamy na nasz ślub</p>
+            <div className="hero-date fade-in-up fade-in-delay-2">
               <span>24</span>
               <span className="dot">•</span>
               <span>04</span>
