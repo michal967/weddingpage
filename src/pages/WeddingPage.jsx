@@ -6,14 +6,7 @@ import heroBg from "../images/hero-bg.jpeg";
 import { toast } from 'sonner';
 import { Toaster } from 'sonner';
 
-<div className="App">
-  <BrowserRouter>
-    <Toaster position="top-right" />
-    <Routes>
-      <Route path="/" element={<WeddingPage />} />
-    </Routes>
-  </BrowserRouter>
-</div>
+
 
 const WeddingPage = () => {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
