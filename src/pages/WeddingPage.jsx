@@ -195,8 +195,8 @@ if (difference > 0) {
         <div className="hero-content">
           <div className="hero-text fade-in-up">
             <h1 className="hero-names fade-in-up">Kinga & Michał</h1>
-            <p className="hero-subtitle fade-in-up fade-in-delay-3">Zapraszamy na nasz ślub</p>
-            <div className="hero-date fade-in-ip fade-in-delay-6">
+            <p className="hero-subtitle fade-in-up fade-in-delay-1">Zapraszamy na nasz ślub</p>
+            <div className="hero-date fade-in-ip fade-in-delay-2">
               <span>24</span>
               <span className="dot">•</span>
               <span>04</span>
@@ -307,10 +307,11 @@ if (difference > 0) {
                 href="https://maps.app.goo.gl/WXoWZUWh7tDLzjoy7"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline"
+                className="btn btn-outline contact-hover"
               >
                 Nawiguj w Google Maps
               </a>
+
             </div>
 
             <div className="venue-card">
@@ -335,7 +336,7 @@ if (difference > 0) {
                 href="https://maps.app.goo.gl/xE75TjZVjaR63TvY9"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline"
+                className="btn btn-outline contact-hover"
               >
                 Nawiguj w Google Maps
               </a>
@@ -350,7 +351,7 @@ if (difference > 0) {
           <h2 className="section-title">Zapisz datę</h2>
           <div className="save-date-wrapper">
             <button
-              className="btn btn-primary"
+              className="btn btn-primary contact hover"
               onClick={() => setShowCalendarOptions(!showCalendarOptions)}
             >
               <Calendar size={20} strokeWidth={2} />
@@ -394,7 +395,7 @@ if (difference > 0) {
             {faqData.map((item, index) => (
               <div
                 key={index}
-                className={`faq-item ${activeFaq === index ? 'active' : ''} fade-in-up`}
+                className={`faq-item contact hover${activeFaq === index ? 'active' : ''} fade-in-up`}
                 style={{ animationDelay: `${index * 0.15}s` }}
               >
                 <button
