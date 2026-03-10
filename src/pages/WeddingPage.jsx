@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './WeddingPage.css';
 import { Church, Wine, Calendar, Phone, Mail, Heart } from 'lucide-react';
 import heroBg from "../images/hero-bg.jpeg";
+import confetti from 'canvas-confetti';
 
 
 
@@ -412,59 +413,74 @@ if (difference > 0) {
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="wedding-section contact">
-        <div className="container">
-          <h2 className="section-title">Kontakt</h2>
-          <div className="contact-wrapper">
-            <div className="decorative-line"></div>
-            <p>W razie pytań prosimy o kontakt</p>
-            <div className="contact-grid">
-              <div className="contact-person">
-                <h3>Kinga</h3>
-                <div className="contact-info">
-                  <div className="contact-item">
-                    <span className="contact-icon">
-                      <Phone size={20} strokeWidth={1.5} />
-                    </span>
-                    <span className="contact-text"><a href="tel:+48507562811">+48 507 562 811</a></span>
-                  </div>
-                  <div className="contact-item">
-                    <span className="contact-icon">
-                      <Mail size={20} strokeWidth={1.5} />
-                    </span>
-                    <span className="contact-text"><a href="mailto:kingawojcik5252@gmail.com">kingawojcik5252@gmail.com</a></span>
-                  </div>
-                </div>
-              </div>
-              <div className="contact-person">
-                <h3>Michał</h3>
-                <div className="contact-info">
-                  <div className="contact-item">
-                    <span className="contact-icon">
-                      <Phone size={20} strokeWidth={1.5} />
-                    </span>
-                    <span className="contact-text"><a href="tel:+48511779350">+48 511 779 350</a></span>
-                  </div>
-                  <div className="contact-item">
-                    <span className="contact-icon">
-                      <Mail size={20} strokeWidth={1.5} />
-                    </span>
-                    <span className="contact-text"><a href="mailto:michalokozak@gmail.com">michalokozak@gmail.com</a></span>
-                  </div>
-                </div>
-              </div>
+{/* Contact */}
+<section className="wedding-section contact">
+  <div className="container">
+    <h2 className="section-title">Kontakt</h2>
+    <div className="contact-wrapper">
+      <div className="decorative-line"></div>
+      <p>W razie pytań prosimy o kontakt</p>
+      <div className="contact-grid">
+        {/* Kinga */}
+        <div className="contact-person">
+          <h3>Kinga</h3>
+          <div className="contact-info">
+            <div className="contact-item group">
+              <span className="contact-icon">
+                <Phone size={20} strokeWidth={1.5} />
+              </span>
+              <span className="contact-text relative">
+                <a href="tel:+48507562811">+48 507 562 811</a>
+                <span className="tooltip">Kliknij, aby zadzwonić</span>
+              </span>
             </div>
-            <div className="decorative-line"></div>
+            <div className="contact-item group">
+              <span className="contact-icon">
+                <Mail size={20} strokeWidth={1.5} />
+              </span>
+              <span className="contact-text relative">
+                <a href="mailto:kingawojcik5252@gmail.com">kingawojcik5252@gmail.com</a>
+                <span className="tooltip">Kliknij, aby wysłać maila</span>
+              </span>
+            </div>
           </div>
         </div>
-      </section>
+
+        {/* Michał */}
+        <div className="contact-person">
+          <h3>Michał</h3>
+          <div className="contact-info">
+            <div className="contact-item group">
+              <span className="contact-icon">
+                <Phone size={20} strokeWidth={1.5} />
+              </span>
+              <span className="contact-text relative">
+                <a href="tel:+48511779350">+48 511 779 350</a>
+                <span className="tooltip">Kliknij, aby zadzwonić</span>
+              </span>
+            </div>
+            <div className="contact-item group">
+              <span className="contact-icon">
+                <Mail size={20} strokeWidth={1.5} />
+              </span>
+              <span className="contact-text relative">
+                <a href="mailto:michalokozak@gmail.com">michalokozak@gmail.com</a>
+                <span className="tooltip">Kliknij, aby wysłać maila</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="decorative-line"></div>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="footer">
         <div className="container">
           <div className="footer-line"></div>
-          <p className="footer-quote">
+          <p className="footer-quote" onMouseEnter={() => confetti({ particleCount: 100, spread: 70 })}>
             Do zobaczenia!
           </p>
           <p className="footer-text">
