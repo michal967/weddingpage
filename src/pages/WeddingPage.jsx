@@ -11,33 +11,6 @@ const WeddingPage = () => {
   const [activeFaq, setActiveFaq] = useState(null);
   const [showCalendarOptions, setShowCalendarOptions] = useState(false);
 
-// ScrollToTopButton – pływająca strzałka do góry
-const ScrollToTopButton = () => {
-  const [visible, setVisible] = React.useState(false);
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.scrollY > 300); // po przewinięciu 300px w dół pokaż przycisk
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // płynne przewijanie na górę
-  };
-
-  return (
-    <button
-      className={`scroll-to-top ${visible ? 'visible' : ''}`}
-      onClick={scrollToTop}
-      aria-label="Scroll to top"
-    >
-      <ArrowUp size={24} />
-    </button>
-  );
-};
-
   // Countdown Timer - do godziny 17:00 (ceremonia)
   useEffect(() => {
     const updateCountdown = () => {
@@ -551,7 +524,6 @@ const ScrollToTopButton = () => {
           </p>
         </div>
       </footer>
-      <ScrollToTopButton />
     </div>
   );
 };
