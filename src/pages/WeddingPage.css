@@ -1,8 +1,11 @@
-/* Wedding Page Styles */
+/* Wedding Page Styles - Gold primary, Pink only in contact */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
 .wedding-page {
   font-family: 'Montserrat', sans-serif;
   color: #3A3A3A;
   background-color: #FAF7F2;
+  overflow-x: hidden;
 }
 
 /* Typography */
@@ -137,6 +140,14 @@
   animation: fadeInUp 1s ease forwards 0.5s;
 }
 
+.fade-in-delay-1 {
+  animation-delay: 0.9s;
+}
+
+.fade-in-delay-2 {
+  animation-delay: 1.3s;
+}
+
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -202,17 +213,9 @@
   background: #FAF7F2;
 }
 
-.countdown-number {
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-.countdown-number.animate-flip {
-  transform: rotateX(360deg);
-}
-
 .countdown-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   max-width: 800px;
   margin: 0 auto;
@@ -229,7 +232,7 @@
 
 .countdown-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 40px rgba(198, 167, 105, 0.25);
 }
 
 .countdown-number {
@@ -238,6 +241,8 @@
   font-weight: 700;
   color: #C6A769;
   margin-bottom: 0.5rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
 .countdown-label {
@@ -310,7 +315,7 @@
 
 .timeline-content:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 40px rgba(198, 167, 105, 0.25);
 }
 
 .timeline-content::before {
@@ -379,11 +384,6 @@
   .timeline-content::before {
     left: -45px !important;
   }
-
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
 }
 
 /* Venues Section */
@@ -408,7 +408,7 @@
 
 .venue-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 50px rgba(198, 167, 105, 0.2);
 }
 
 .venue-card h3 {
@@ -445,31 +445,38 @@
 
 /* Buttons */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 1rem 2rem;
   border: none;
   border-radius: 50px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+  font-size: 1rem;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   margin: 1rem;
 }
 
 .btn-primary {
   background: #C6A769;
-  color: white;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(198, 167, 105, 0.4);
 }
 
 .btn-primary:hover {
   background: #b89956;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(198, 167, 105, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(198, 167, 105, 0.5);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(198, 167, 105, 0.4);
 }
 
 .btn-outline {
@@ -481,7 +488,27 @@
 .btn-outline:hover {
   background: #C6A769;
   color: white;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(198, 167, 105, 0.4);
+}
+
+.btn-outline:active {
+  background: #b89956;
+  transform: translateY(-1px);
+}
+
+/* Calendar Button */
+.calendar-btn {
+  font-size: 1.1rem;
+  padding: 1.2rem 2.5rem;
+}
+
+.calendar-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.calendar-btn:hover svg {
+  transform: rotate(15deg);
 }
 
 /* Save Date Section */
@@ -496,55 +523,57 @@
 }
 
 .calendar-options {
-  position: fixed;
-  top: 50%;
+  position: absolute;
+  top: calc(100% + 10px);
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   background: white;
   border-radius: 15px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  padding: 1.5rem;
-  display: none;
-  min-width: 250px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  min-width: 220px;
   z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
 
 .calendar-options.show {
-  display: block;
-  animation: fadeInCenter 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  animation: dropdownFadeIn 0.3s ease;
 }
 
-@keyframes fadeInCenter {
+@keyframes dropdownFadeIn {
   from {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.9);
+    transform: translateX(-50%) translateY(-10px);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translateX(-50%) translateY(0);
   }
 }
 
-/* Backdrop for calendar dropdown */
-.calendar-options.show::before {
+.calendar-options::before {
   content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: -1;
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
 }
 
 .calendar-option {
   display: block;
   width: 100%;
-  padding: 0.8rem 1rem;
+  padding: 1rem 1.5rem;
   color: #3A3A3A;
   text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.3s ease, transform 0.2s ease;
+  border-radius: 10px;
+  transition: all 0.3s ease;
   background: none;
   border: none;
   font-family: 'Montserrat', sans-serif;
@@ -555,7 +584,13 @@
 
 .calendar-option:hover {
   background: #F5EFE8;
+  color: #C6A769;
   transform: translateX(5px);
+}
+
+.calendar-option:active {
+  background: #C6A769;
+  color: white;
 }
 
 /* Quote Section */
@@ -593,7 +628,7 @@ blockquote {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.15);
   }
 }
 
@@ -612,12 +647,17 @@ blockquote {
   border-radius: 15px;
   margin-bottom: 1rem;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
 .faq-item:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(198, 167, 105, 0.15);
+  transform: translateY(-2px);
+}
+
+.faq-item.active {
+  box-shadow: 0 10px 35px rgba(198, 167, 105, 0.2);
 }
 
 .faq-question {
@@ -626,6 +666,7 @@ blockquote {
   background: none;
   border: none;
   text-align: left;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
   font-weight: 500;
   color: #3A3A3A;
@@ -633,40 +674,48 @@ blockquote {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .faq-question:hover {
   color: #C6A769;
 }
 
-.faq-toggle {
-  font-size: 1.5rem;
+.faq-item.active .faq-question {
   color: #C6A769;
-  transition: transform 0.5s ease;
+  background: rgba(198, 167, 105, 0.05);
+}
+
+.faq-toggle {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #C6A769;
+  transition: transform 0.4s ease;
+  min-width: 30px;
+  text-align: center;
 }
 
 .faq-item.active .faq-toggle {
-  transform: rotate(45deg);
+  transform: rotate(180deg);
 }
 
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.7s ease;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .faq-item.active .faq-answer {
-  max-height: 200px;
+  max-height: 300px;
 }
 
 .faq-answer p {
   padding: 0 1.5rem 1.5rem;
   color: #666;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
-/* Contact Section */
+/* Contact Section - PINK ACCENTS HERE */
 .contact {
   background: #FAF7F2;
   text-align: center;
@@ -675,6 +724,11 @@ blockquote {
 .contact-wrapper {
   max-width: 900px;
   margin: 0 auto;
+}
+
+.contact-wrapper > p {
+  color: #666;
+  margin-bottom: 2rem;
 }
 
 .contact-grid {
@@ -695,13 +749,13 @@ blockquote {
 
 .contact-person:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 40px rgba(232, 164, 180, 0.25);
 }
 
 .contact-person h3 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: #C6A769;
+  color: #E8A4B4;
 }
 
 .contact-info {
@@ -719,14 +773,118 @@ blockquote {
 }
 
 .contact-icon {
-  margin-right: 1rem;
-  color: #C6A769;
+  color: #E8A4B4;
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
+}
+
+.contact-item.group:hover .contact-icon {
+  transform: scale(1.2) rotate(10deg);
+  color: #D4919F;
 }
 
 .contact-text {
-  color: #666;
+  position: relative;
+}
+
+/* Contact links - PINK */
+.contact a {
+  color: #E8A4B4;
+  text-decoration: none;
+  position: relative;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.contact a:hover {
+  color: #D4919F;
+}
+
+.contact a:active {
+  color: #C67F8C;
+}
+
+.contact a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #E8A4B4, transparent);
+  transform: translateX(-50%) scaleX(0);
+  transition: transform 0.3s ease;
+  border-radius: 2px;
+}
+
+.contact a:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Tooltip - PINK for contact */
+.tooltip {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #E8A4B4, #D4919F);
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(232, 164, 180, 0.4);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #D4919F;
+}
+
+.group:hover .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* General links - GOLD */
+.wedding-page a {
+  color: #C6A769;
+  text-decoration: none;
+  position: relative;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.wedding-page a:hover {
+  color: #b89956;
+}
+
+.wedding-page a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C6A769, transparent);
+  transform: translateX(-50%) scaleX(0);
+  transition: transform 0.3s ease;
+  border-radius: 2px;
+}
+
+.wedding-page a:hover::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 /* Footer */
@@ -740,16 +898,23 @@ blockquote {
 .footer-line {
   width: 100px;
   height: 1px;
-  background: #C6A769;
+  background: linear-gradient(90deg, transparent, #C6A769, transparent);
   margin: 0 auto 1rem;
 }
 
 .footer-quote {
   font-family: 'Playfair Display', serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-style: italic;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.footer-quote:hover {
+  color: #C6A769;
+  transform: scale(1.05);
 }
 
 .footer-text {
@@ -763,6 +928,16 @@ blockquote {
 
 .footer-heart {
   color: #C6A769;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.2); 
+  }
 }
 
 /* Scroll Animations */
@@ -800,11 +975,20 @@ blockquote {
   .section-title {
     font-size: 2rem;
   }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .calendar-options {
+    min-width: 200px;
+  }
 }
 
 @media (max-width: 480px) {
   .countdown-wrapper {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .btn {
@@ -823,6 +1007,11 @@ blockquote {
   .venue-info {
     padding: 0 1.5rem 1rem;
   }
+
+  .faq-question {
+    font-size: 1rem;
+    padding: 1.2rem;
+  }
 }
 
 /* Accessibility */
@@ -833,159 +1022,18 @@ blockquote {
     transition-duration: 0.01ms !important;
   }
 }
-/* Wedding-style links */
-.wedding-page a {
-  color: #C6A769;
-  text-decoration: none;
-  position: relative;
-  font-weight: 400;
-  transition: color 0.3s ease;
+
+/* Focus styles */
+.btn:focus,
+.faq-question:focus,
+.calendar-option:focus {
+  outline: 3px solid rgba(198, 167, 105, 0.5);
+  outline-offset: 2px;
 }
 
-.wedding-page a:hover {
-  color: #b89956;
+/* Selection color */
+.wedding-page ::selection {
+  background: #C6A769;
+  color: white;
 }
 
-/* Subtle ribbon-style underline */
-.wedding-page a::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: -4px;
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #C6A769, transparent);
-  transform: translateX(-50%) scaleX(0);
-  transition: transform 0.3s ease;
-  border-radius: 2px;
-}
-
-.wedding-page a:hover::after {
-  transform: translateX(-50%) scaleX(1);
-}
-
-/* Optional small heart on hover */
-.wedding-page a:hover::before {
-  content: '♥';
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.7rem;
-  color: #E8CFCF;
-  animation: heartFloat 0.6s ease forwards;
-}
-
-@keyframes heartFloat {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 5px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-/* Text animation */
-.fade-in-up {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUp 1.2s ease forwards;
-}
-
-.fade-in-delay-1 {
-  animation-delay: 0.4s;
-}
-
-.fade-in-delay-2 {
-  animation-delay: 0.8s;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.heart-decoration svg {
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
-
-.fade-in-up {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.5s forwards;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Tooltip */
-.contact-text {
-  position: relative;
-}
-.tooltip {
-  position: absolute;
-  bottom: 125%; /* nad linkiem */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: #fff;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 4px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 10;
-}
-.group:hover .tooltip {
-  opacity: 1;
-}
-
-/* Hover efekt dla ikon */
-.contact-icon svg {
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-.group:hover .contact-icon svg {
-  transform: scale(1.2) rotate(10deg);
-  color: #f472b6; /* np. delikatny róż */
-}
-
-.footer-heart {
-  animation: pulse 1.5s infinite;
-}
-
-.contact-hover {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.contact-hover:hover {
-  color: #f472b6; /* przykładowy efekt koloru */
-  transform: scale(1.05);
-}
-
-.faq-item.contact-hover {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-}
-
-.faq-item.contact-hover:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}

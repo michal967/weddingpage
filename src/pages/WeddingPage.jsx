@@ -1,10 +1,9 @@
-// Wedding Page - Version 2.0 - Updated
+// Wedding Page - Version 2.0 - Fixed
 import React, { useState, useEffect } from 'react';
 import './WeddingPage.css';
 import { Church, Wine, Calendar, Phone, Mail, Heart } from 'lucide-react';
-import heroBg from "../images/hero-bg.jpeg";
 import confetti from 'canvas-confetti';
-
+import heroBg from "../images/hero-bg.jpeg";
 
 
 const WeddingPage = () => {
@@ -19,15 +18,15 @@ const WeddingPage = () => {
       const now = new Date();
       const difference = weddingDate - now;
 
-if (difference > 0) {
-  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-  setCountdown({ days, hours, minutes, seconds });
-} else {
-  setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-}
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        setCountdown({ days, hours, minutes, seconds });
+      } else {
+        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
     };
 
     updateCountdown();
@@ -58,6 +57,17 @@ if (difference > 0) {
     return () => observer.disconnect();
   }, []);
 
+  // Close calendar dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (showCalendarOptions && !e.target.closest('.save-date-wrapper')) {
+        setShowCalendarOptions(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [showCalendarOptions]);
+
   // Calendar integration
   const handleCalendarClick = (type) => {
     const eventDetails = {
@@ -77,7 +87,6 @@ if (difference > 0) {
       googleUrl.searchParams.append('dates', `${eventDetails.startDate}/${eventDetails.endDate}`);
       window.open(googleUrl.toString(), '_blank');
     } else if (type === 'apple') {
-      // Generate ICS file for Apple Calendar
       const icsContent = generateICS(eventDetails);
       const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
       const link = document.createElement('a');
@@ -139,64 +148,68 @@ if (difference > 0) {
     return icsLines.join('\r\n');
   };
 
+  const toggleFaq = (index) => {
+    setActiveFaq(activeFaq === index ? null : index);
+  };
+
   const faqData = [
     {
       question: 'Czy ceremonia i wesele odbywają się w tym samym miejscu?',
       answer: 'Nie. Ceremonia ślubna odbędzie się w kościele, natomiast przyjęcie weselne w sali położonej na obrzeżach Warszawy. Dokładne adresy znajdziecie w zakładce Lokalizacja.'
     },
-     {
+    {
       question: 'Czy będzie zapewniony transport między kościołem a salą?',
       answer: 'Nie organizujemy wspólnego transportu. Do sali można wygodnie dojechać samochodem lub skorzystać z usług przewozowych, takich jak Uber.'
-    },   
-     {
+    },
+    {
       question: 'Czy można przyjść z osobą towarzyszącą?',
       answer: 'Oczywiście – jeśli na zaproszeniu została wskazana osoba towarzysząca, będzie nam bardzo miło gościć Was razem.'
-    }, 
-     {
+    },
+    {
       question: 'Czy dzieci są zaproszone?',
       answer: 'Tak. Jeśli planujecie przyjechać z dziećmi, będą one mile widziane.'
-    }, 
-     {
+    },
+    {
       question: 'Czy będą poprawiny?',
       answer: 'Nie planujemy poprawin – chcemy w pełni nacieszyć się wspólnym świętowaniem tego jednego dnia.'
-    }, 
-     {
+    },
+    {
       question: 'Jakie prezenty sprawią nam największą radość?',
       answer: 'Najwygodniejszą formą prezentu będzie koperta. Jeśli jednak ktoś chciałby podarować również drobny upominek, z pewnością sprawi nam to dużą przyjemność.'
-    }, 
-     {
+    },
+    {
       question: 'Czy zapewniamy nocleg dla gości?',
       answer: 'Nie organizujemy noclegów, jednak w pobliżu sali weselnej znajduje się kilka hoteli, z których można skorzystać według własnych preferencji.'
-    }, 
-     {
+    },
+    {
       question: 'Czy można zgłosić dietę specjalną?',
       answer: 'Tak, oczywiście. Jeśli jesteście wegetarianami lub macie alergie pokarmowe, prosimy o informację podczas potwierdzania obecności – zadbamy o odpowiednie menu.'
-    }, 
-     {
+    },
+    {
       question: 'Do kiedy należy potwierdzić obecność?',
       answer: 'Będziemy bardzo wdzięczni za potwierdzenie przybycia do 1 marca 2027 roku. Można to zrobić telefonicznie lub mailowo – dane znajdziecie w zakładce Kontakt.'
-    }, 
-     {
+    },
+    {
       question: 'Czy na miejscu będzie parking?',
       answer: 'Tak. Parking będzie dostępny zarówno przy kościele, jak i przy sali weselnej.'
-    }, 
-     {
+    },
+    {
       question: 'Czy można robić zdjęcia podczas ceremonii?',
       answer: 'Podczas ceremonii w kościele prosimy o pozostawienie fotografowania naszemu fotografowi. Po zakończeniu ceremonii oraz podczas przyjęcia zachęcamy do robienia zdjęć i uwieczniania wspólnych chwil.'
-    },  
+    },
   ];
 
   return (
-    <div className="wedding-page">
+    <div className="wedding-page" data-testid="wedding-page">
       {/* Hero Section */}
-      <section className="hero">
+      <section className="hero" data-testid="hero-section">
         <div className="hero-bg" style={{ backgroundImage: `url(${heroBg})` }}></div>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <div className="hero-text fade-in-up">
             <h1 className="hero-names fade-in-up">Kinga & Michał</h1>
             <p className="hero-subtitle fade-in-up fade-in-delay-1">Zapraszamy na nasz ślub</p>
-            <div className="hero-date fade-in-ip fade-in-delay-2">
+            <div className="hero-date fade-in-up fade-in-delay-2">
               <span>24</span>
               <span className="dot">•</span>
               <span>04</span>
@@ -212,7 +225,7 @@ if (difference > 0) {
       </section>
 
       {/* Welcome Text */}
-      <section className="wedding-section welcome">
+      <section className="wedding-section welcome" data-testid="welcome-section">
         <div className="container">
           <div className="content-wrapper">
             <div className="decorative-line"></div>
@@ -225,7 +238,7 @@ if (difference > 0) {
       </section>
 
       {/* Countdown */}
-      <section className="wedding-section countdown">
+      <section className="wedding-section countdown" data-testid="countdown-section">
         <div className="container">
           <h2 className="section-title">Do naszego ślubu zostało</h2>
           <div className="countdown-wrapper">
@@ -250,11 +263,10 @@ if (difference > 0) {
       </section>
 
       {/* Timeline */}
-      <section className="wedding-section timeline">
+      <section className="wedding-section timeline" data-testid="timeline-section">
         <div className="container">
           <h2 className="section-title">Nasz dzień</h2>
           <div className="timeline-wrapper">
-            {/* Łatwo dodawaj nowe wydarzenia - po prostu skopiuj timeline-item */}
             <div className="timeline-item">
               <div className="timeline-time">17:00</div>
               <div className="timeline-content">
@@ -280,7 +292,7 @@ if (difference > 0) {
       </section>
 
       {/* Venues */}
-      <section className="wedding-section venues">
+      <section className="wedding-section venues" data-testid="venues-section">
         <div className="container">
           <h2 className="section-title">Jak do nas dojechać</h2>
           <div className="venues-grid">
@@ -307,11 +319,11 @@ if (difference > 0) {
                 href="https://maps.app.goo.gl/WXoWZUWh7tDLzjoy7"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline contact-hover"
+                className="btn btn-outline"
+                data-testid="ceremony-map-btn"
               >
                 Nawiguj w Google Maps
               </a>
-
             </div>
 
             <div className="venue-card">
@@ -324,6 +336,7 @@ if (difference > 0) {
               <div className="map-container">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2436.256688531455!2d20.940972776377794!3d52.365765447637614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ec81ef57fe173%3A0x973f96a8918f350f!2sSala%20weselna%20Ostoja!5e0!3m2!1spl!2spl!4v1773127312830!5m2!1spl!2spl"
+                  width="100%"
                   height="200"
                   style={{ border: 0 }}
                   allowFullScreen=""
@@ -336,7 +349,8 @@ if (difference > 0) {
                 href="https://maps.app.goo.gl/xE75TjZVjaR63TvY9"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline contact-hover"
+                className="btn btn-outline"
+                data-testid="reception-map-btn"
               >
                 Nawiguj w Google Maps
               </a>
@@ -346,23 +360,35 @@ if (difference > 0) {
       </section>
 
       {/* Save the Date */}
-      <section className="wedding-section save-date">
+      <section className="wedding-section save-date" data-testid="save-date-section">
         <div className="container">
           <h2 className="section-title">Zapisz datę</h2>
           <div className="save-date-wrapper">
             <button
-              className="btn btn-primary contact hover"
-              onClick={() => setShowCalendarOptions(!showCalendarOptions)}
+              className="btn btn-primary calendar-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowCalendarOptions(!showCalendarOptions);
+              }}
+              data-testid="calendar-btn"
             >
               <Calendar size={20} strokeWidth={2} />
               <span>Dodaj do kalendarza</span>
             </button>
             {showCalendarOptions && (
-              <div className="calendar-options show">
-                <button onClick={() => handleCalendarClick('google')} className="calendar-option">
+              <div className="calendar-options show" data-testid="calendar-options">
+                <button 
+                  onClick={() => handleCalendarClick('google')} 
+                  className="calendar-option"
+                  data-testid="google-calendar-btn"
+                >
                   Google Calendar
                 </button>
-                <button onClick={() => handleCalendarClick('apple')} className="calendar-option">
+                <button 
+                  onClick={() => handleCalendarClick('apple')} 
+                  className="calendar-option"
+                  data-testid="apple-calendar-btn"
+                >
                   Apple Calendar
                 </button>
               </div>
@@ -372,7 +398,7 @@ if (difference > 0) {
       </section>
 
       {/* Quote */}
-      <section className="wedding-section quote">
+      <section className="wedding-section quote" data-testid="quote-section">
         <div className="container">
           <div className="quote-wrapper">
             <div className="decorative-line"></div>
@@ -388,22 +414,23 @@ if (difference > 0) {
       </section>
 
       {/* FAQ */}
-      <section className="wedding-section faq">
+      <section className="wedding-section faq" data-testid="faq-section">
         <div className="container">
           <h2 className="section-title">Często zadawane pytania</h2>
           <div className="faq-wrapper">
             {faqData.map((item, index) => (
               <div
                 key={index}
-                className={`faq-item contact hover${activeFaq === index ? 'active' : ''} fade-in-up`}
-                style={{ animationDelay: `${index * 0.15}s` }}
+                className={`faq-item ${activeFaq === index ? 'active' : ''}`}
+                data-testid={`faq-item-${index}`}
               >
                 <button
                   className="faq-question"
-                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  onClick={() => toggleFaq(index)}
+                  data-testid={`faq-question-${index}`}
                 >
                   {item.question}
-                  <span className="faq-toggle">+</span>
+                  <span className="faq-toggle">{activeFaq === index ? '−' : '+'}</span>
                 </button>
                 <div className="faq-answer">
                   <p>{item.answer}</p>
@@ -414,74 +441,78 @@ if (difference > 0) {
         </div>
       </section>
 
-{/* Contact */}
-<section className="wedding-section contact">
-  <div className="container">
-    <h2 className="section-title">Kontakt</h2>
-    <div className="contact-wrapper">
-      <div className="decorative-line"></div>
-      <p>W razie pytań prosimy o kontakt</p>
-      <div className="contact-grid">
-        {/* Kinga */}
-        <div className="contact-person">
-          <h3>Kinga</h3>
-          <div className="contact-info">
-            <div className="contact-item group">
-              <span className="contact-icon">
-                <Phone size={20} strokeWidth={1.5} />
-              </span>
-              <span className="contact-text relative">
-                <a href="tel:+48507562811">+48 507 562 811</a>
-                <span className="tooltip">Kliknij, aby zadzwonić</span>
-              </span>
-            </div>
-            <div className="contact-item group">
-              <span className="contact-icon">
-                <Mail size={20} strokeWidth={1.5} />
-              </span>
-              <span className="contact-text relative">
-                <a href="mailto:kingawojcik5252@gmail.com">kingawojcik5252@gmail.com</a>
-                <span className="tooltip">Kliknij, aby wysłać maila</span>
-              </span>
-            </div>
-          </div>
-        </div>
+      {/* Contact */}
+      <section className="wedding-section contact" data-testid="contact-section">
+        <div className="container">
+          <h2 className="section-title">Kontakt</h2>
+          <div className="contact-wrapper">
+            <div className="decorative-line"></div>
+            <p>W razie pytań prosimy o kontakt</p>
+            <div className="contact-grid">
+              {/* Kinga */}
+              <div className="contact-person">
+                <h3>Kinga</h3>
+                <div className="contact-info">
+                  <div className="contact-item group">
+                    <span className="contact-icon">
+                      <Phone size={20} strokeWidth={1.5} />
+                    </span>
+                    <span className="contact-text">
+                      <a href="tel:+48507562811" data-testid="kinga-phone">+48 507 562 811</a>
+                      <span className="tooltip">Kliknij, aby zadzwonić</span>
+                    </span>
+                  </div>
+                  <div className="contact-item group">
+                    <span className="contact-icon">
+                      <Mail size={20} strokeWidth={1.5} />
+                    </span>
+                    <span className="contact-text">
+                      <a href="mailto:kingawojcik5252@gmail.com" data-testid="kinga-email">kingawojcik5252@gmail.com</a>
+                      <span className="tooltip">Kliknij, aby wysłać maila</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
 
-        {/* Michał */}
-        <div className="contact-person">
-          <h3>Michał</h3>
-          <div className="contact-info">
-            <div className="contact-item group">
-              <span className="contact-icon">
-                <Phone size={20} strokeWidth={1.5} />
-              </span>
-              <span className="contact-text relative">
-                <a href="tel:+48511779350">+48 511 779 350</a>
-                <span className="tooltip">Kliknij, aby zadzwonić</span>
-              </span>
+              {/* Michał */}
+              <div className="contact-person">
+                <h3>Michał</h3>
+                <div className="contact-info">
+                  <div className="contact-item group">
+                    <span className="contact-icon">
+                      <Phone size={20} strokeWidth={1.5} />
+                    </span>
+                    <span className="contact-text">
+                      <a href="tel:+48511779350" data-testid="michal-phone">+48 511 779 350</a>
+                      <span className="tooltip">Kliknij, aby zadzwonić</span>
+                    </span>
+                  </div>
+                  <div className="contact-item group">
+                    <span className="contact-icon">
+                      <Mail size={20} strokeWidth={1.5} />
+                    </span>
+                    <span className="contact-text">
+                      <a href="mailto:michalokozak@gmail.com" data-testid="michal-email">michalokozak@gmail.com</a>
+                      <span className="tooltip">Kliknij, aby wysłać maila</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="contact-item group">
-              <span className="contact-icon">
-                <Mail size={20} strokeWidth={1.5} />
-              </span>
-              <span className="contact-text relative">
-                <a href="mailto:michalokozak@gmail.com">michalokozak@gmail.com</a>
-                <span className="tooltip">Kliknij, aby wysłać maila</span>
-              </span>
-            </div>
+            <div className="decorative-line"></div>
           </div>
         </div>
-      </div>
-      <div className="decorative-line"></div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Footer */}
-      <footer className="footer">
+      <footer className="footer" data-testid="footer">
         <div className="container">
           <div className="footer-line"></div>
-          <p className="footer-quote" onMouseEnter={() => confetti({ particleCount: 100, spread: 70 })}>
+          <p 
+            className="footer-quote" 
+            onMouseEnter={() => confetti({ particleCount: 100, spread: 70 })}
+            data-testid="footer-confetti"
+          >
             Do zobaczenia!
           </p>
           <p className="footer-text">
@@ -494,3 +525,5 @@ if (difference > 0) {
 };
 
 export default WeddingPage;
+
+
