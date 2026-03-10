@@ -458,8 +458,7 @@ const WeddingPage = () => {
                       <Phone size={20} strokeWidth={1.5} />
                     </span>
                     <span className="contact-text">
-                      <a href="tel:+48507562811" data-testid="kinga-phone">+48 507 562 811</a>
-                      <span className="tooltip">Kliknij, aby zadzwonić</span>
+                      <a href="tel:+48507562811" data-testid="kinga-phone">Kliknij, aby zadzwonić</a>
                     </span>
                   </div>
                   <div className="contact-item group">
@@ -467,8 +466,7 @@ const WeddingPage = () => {
                       <Mail size={20} strokeWidth={1.5} />
                     </span>
                     <span className="contact-text">
-                      <a href="mailto:kingawojcik5252@gmail.com" data-testid="kinga-email">kingawojcik5252@gmail.com</a>
-                      <span className="tooltip">Kliknij, aby wysłać maila</span>
+                      <a href="mailto:kingawojcik5252@gmail.com" data-testid="kinga-email">Kliknij, aby wysłać maila</a>
                     </span>
                   </div>
                 </div>
@@ -483,8 +481,7 @@ const WeddingPage = () => {
                       <Phone size={20} strokeWidth={1.5} />
                     </span>
                     <span className="contact-text">
-                      <a href="tel:+48511779350" data-testid="michal-phone">+48 511 779 350</a>
-                      <span className="tooltip">Kliknij, aby zadzwonić</span>
+                      <a href="tel:+48511779350" data-testid="michal-phone">Kliknij, aby zadzwonić</a>
                     </span>
                   </div>
                   <div className="contact-item group">
@@ -492,8 +489,7 @@ const WeddingPage = () => {
                       <Mail size={20} strokeWidth={1.5} />
                     </span>
                     <span className="contact-text">
-                      <a href="mailto:michalokozak@gmail.com" data-testid="michal-email">michalokozak@gmail.com</a>
-                      <span className="tooltip">Kliknij, aby wysłać maila</span>
+                      <a href="mailto:michalokozak@gmail.com" data-testid="michal-email">Kliknij, aby wysłać maila</a>
                     </span>
                   </div>
                 </div>
