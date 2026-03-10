@@ -70,8 +70,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://images.unsplash.com/photo-1767986012138-4893f40932d5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwd2VkZGluZyUyMGNlcmVtb255fGVufDB8fHx8MTc3MjkyNDM2NXww&ixlib=rb-4.1.0&q=85')
-    center/cover no-repeat;
+  background-image: url('/images/hero-bg.jpeg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   transform: scale(1.1);
   transition: transform 0.3s ease;
 }
