@@ -3,6 +3,17 @@ import React, { useState, useEffect } from 'react';
 import './WeddingPage.css';
 import { Church, Wine, Calendar, Phone, Mail, Heart } from 'lucide-react';
 import heroBg from "../images/hero-bg.jpeg";
+import { toast } from 'sonner';
+import { Toaster } from 'sonner';
+
+<div className="App">
+  <BrowserRouter>
+    <Toaster position="top-right" />
+    <Routes>
+      <Route path="/" element={<WeddingPage />} />
+    </Routes>
+  </BrowserRouter>
+</div>
 
 const WeddingPage = () => {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -72,6 +83,7 @@ if (difference > 0) {
       googleUrl.searchParams.append('details', eventDetails.description);
       googleUrl.searchParams.append('location', eventDetails.location);
       googleUrl.searchParams.append('dates', `${eventDetails.startDate}/${eventDetails.endDate}`);
+      toast.success('Zaproszenie dodane do Google Calendar!');
       window.open(googleUrl.toString(), '_blank');
     } else if (type === 'apple') {
       // Generate ICS file for Apple Calendar
@@ -83,6 +95,7 @@ if (difference > 0) {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      toast.success('Plik ICS pobrany! Możesz go otworzyć, aby dodać wydarzenie do Apple Calendar.');
     }
     setShowCalendarOptions(false);
   };
@@ -239,9 +252,7 @@ if (difference > 0) {
               <div className="countdown-label">minuty</div>
             </div>
             <div className="countdown-item">
-              <div className={`countdown-number ${countdown.seconds % 2 === 0 ? 'animate-flip' : ''}`}>
-                {countdown.seconds}
-              </div>
+              <div className="countdown-number">{countdown.seconds}</div>
               <div className="countdown-label">sekundy</div>
             </div>
           </div>
