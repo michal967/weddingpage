@@ -1,7 +1,7 @@
 // Wedding Page - Version 2.0 - Fixed
 import React, { useState, useEffect } from 'react';
 import './WeddingPage.css';
-import { Church, Wine, Calendar, Phone, Mail, Heart } from 'lucide-react';
+import { ArrowUp, Church, Wine, Calendar, Phone, Mail, Heart, Navigation } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import heroBg from "../images/hero-bg.jpeg";
 
@@ -10,6 +10,33 @@ const WeddingPage = () => {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [activeFaq, setActiveFaq] = useState(null);
   const [showCalendarOptions, setShowCalendarOptions] = useState(false);
+
+// ScrollToTopButton – pływająca strzałka do góry
+const ScrollToTopButton = () => {
+  const [visible, setVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setVisible(window.scrollY > 300); // po przewinięciu 300px w dół pokaż przycisk
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // płynne przewijanie na górę
+  };
+
+  return (
+    <button
+      className={`scroll-to-top ${visible ? 'visible' : ''}`}
+      onClick={scrollToTop}
+      aria-label="Scroll to top"
+    >
+      <ArrowUp size={24} />
+    </button>
+  );
+};
 
   // Countdown Timer - do godziny 17:00 (ceremonia)
   useEffect(() => {
@@ -155,7 +182,7 @@ const WeddingPage = () => {
   const faqData = [
     {
       question: 'Czy ceremonia i wesele odbywają się w tym samym miejscu?',
-      answer: 'Nie. Ceremonia ślubna odbędzie się w kościele, natomiast przyjęcie weselne w sali położonej na obrzeżach Warszawy. Dokładne adresy znajdziecie w zakładce Lokalizacja.'
+      answer: 'Nie. Ceremonia ślubna odbędzie się w kościele, natomiast przyjęcie weselne w sali weselnej. Dokładne adresy znajdziecie w zakładce "Jak do nas dojechać".'
     },
     {
       question: 'Czy będzie zapewniony transport między kościołem a salą?',
@@ -220,12 +247,19 @@ const WeddingPage = () => {
           </div>
         </div>
         <div className="scroll-indicator">
-          <div className="scroll-arrow"></div>
+          <button
+            className="scroll-arrow-btn"
+            onClick={() => {
+              document.getElementById('welcome').scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <span className="scroll-arrow"></span>
+          </button>
         </div>
       </section>
 
       {/* Welcome Text */}
-      <section className="wedding-section welcome" data-testid="welcome-section">
+      <section className="wedding-section welcome" data-testid="welcome-section" id="welcome">
         <div className="container">
           <div className="content-wrapper">
             <div className="decorative-line"></div>
@@ -319,12 +353,13 @@ const WeddingPage = () => {
                 href="https://maps.app.goo.gl/WXoWZUWh7tDLzjoy7"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline"
+                className="btn btn-outline navigation-btn"
                 data-testid="ceremony-map-btn"
               >
-                Nawiguj w Google Maps
+                <Navigation size={20} /> Nawiguj w Google Maps
               </a>
             </div>
+
 
             <div className="venue-card">
               <h3>Wesele</h3>
@@ -349,10 +384,10 @@ const WeddingPage = () => {
                 href="https://maps.app.goo.gl/xE75TjZVjaR63TvY9"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-outline"
+                className="btn btn-outline navigation-btn"
                 data-testid="reception-map-btn"
               >
-                Nawiguj w Google Maps
+                <Navigation size={20} /> Nawiguj w Google Maps
               </a>
             </div>
           </div>
@@ -516,6 +551,7 @@ const WeddingPage = () => {
           </p>
         </div>
       </footer>
+      <ScrollToTopButton />
     </div>
   );
 };
