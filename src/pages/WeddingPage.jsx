@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react';
 import './WeddingPage.css';
 import { Church, Wine, Calendar, Phone, Mail, Heart } from 'lucide-react';
 import heroBg from "../images/hero-bg.jpeg";
-import { toast } from 'sonner';
-import { Toaster } from 'sonner';
 
 
 
@@ -76,7 +74,6 @@ if (difference > 0) {
       googleUrl.searchParams.append('details', eventDetails.description);
       googleUrl.searchParams.append('location', eventDetails.location);
       googleUrl.searchParams.append('dates', `${eventDetails.startDate}/${eventDetails.endDate}`);
-      toast.success('Zaproszenie dodane do Google Calendar!');
       window.open(googleUrl.toString(), '_blank');
     } else if (type === 'apple') {
       // Generate ICS file for Apple Calendar
@@ -88,7 +85,6 @@ if (difference > 0) {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      toast.success('Plik ICS pobrany! Możesz go otworzyć, aby dodać wydarzenie do Apple Calendar.');
     }
     setShowCalendarOptions(false);
   };
@@ -397,7 +393,8 @@ if (difference > 0) {
             {faqData.map((item, index) => (
               <div
                 key={index}
-                className={`faq-item ${activeFaq === index ? 'active' : ''}`}
+                className={`faq-item ${activeFaq === index ? 'active' : ''} fade-in-up`}
+                style={{ animationDelay: `${index * 0.15}s` }}
               >
                 <button
                   className="faq-question"
