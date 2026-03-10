@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './WeddingPage.css';
 import { Church, Wine, Calendar, Phone, Mail, Heart } from 'lucide-react';
+import heroBg from "../images/hero-bg.jpeg";
 
 const WeddingPage = () => {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -185,7 +186,7 @@ const WeddingPage = () => {
     <div className="wedding-page">
       {/* Hero Section */}
       <section className="hero">
-        <div className="hero-bg"></div>
+        <div className="hero-bg" style={{ backgroundImage: `url(${heroBg})` }}></div>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <div className="hero-text fade-in-up">
