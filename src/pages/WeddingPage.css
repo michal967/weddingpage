@@ -1,0 +1,879 @@
+/* Wedding Page Styles */
+.wedding-page {
+  font-family: 'Montserrat', sans-serif;
+  color: #3A3A3A;
+  background-color: #FAF7F2;
+}
+
+/* Typography */
+.wedding-page h1,
+.wedding-page h2,
+.wedding-page h3,
+.wedding-page h4,
+.wedding-page h5,
+.wedding-page h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #3A3A3A;
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.wedding-section {
+  padding: 5rem 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .wedding-section {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Decorative Elements */
+.decorative-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C6A769, transparent);
+  margin: 1rem auto;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1767986012138-4893f40932d5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwd2VkZGluZyUyMGNlcmVtb255fGVufDB8fHx8MTc3MjkyNDM2NXww&ixlib=rb-4.1.0&q=85')
+    center/cover no-repeat;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.hero:hover .hero-bg {
+  transform: scale(1.05);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+.hero-names {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero-date {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+}
+
+.hero-date .dot {
+  color: #C6A769;
+  margin: 0 0.5rem;
+}
+
+.hero-location {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+/* Animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards 0.5s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.scroll-arrow {
+  width: 30px;
+  height: 30px;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0) rotate(45deg);
+  }
+  40% {
+    transform: translateY(-10px) rotate(45deg);
+  }
+  60% {
+    transform: translateY(-5px) rotate(45deg);
+  }
+}
+
+/* Welcome Section */
+.welcome {
+  background: #F5EFE8;
+}
+
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.welcome-text {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 300;
+  line-height: 1.8;
+  margin: 2rem 0;
+  font-style: italic;
+}
+
+/* Countdown Section */
+.countdown {
+  background: #FAF7F2;
+}
+
+.countdown-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.countdown-item {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.countdown-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.countdown-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: #C6A769;
+  margin-bottom: 0.5rem;
+}
+
+.countdown-label {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666;
+}
+
+/* Timeline Section */
+.timeline {
+  background: #F5EFE8;
+}
+
+.timeline-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #C6A769;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-item:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+.timeline-time {
+  flex: 0 0 100px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #C6A769;
+  background: #F5EFE8;
+  padding: 0.5rem;
+  border-radius: 8px;
+  z-index: 2;
+}
+
+.timeline-content {
+  flex: 1;
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin: 0 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: #C6A769;
+  border: 4px solid #F5EFE8;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.timeline-item:nth-child(odd) .timeline-content::before {
+  right: -40px;
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+  left: -40px;
+}
+
+.timeline-icon {
+  margin-bottom: 1rem;
+  color: #C6A769;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeline-content h3 {
+  margin-bottom: 0.5rem;
+  color: #3A3A3A;
+}
+
+.timeline-content p {
+  color: #666;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .timeline-wrapper::before {
+    left: 30px;
+  }
+
+  .timeline-item {
+    flex-direction: row !important;
+    padding-left: 80px;
+  }
+
+  .timeline-time {
+    position: absolute;
+    left: 0;
+    top: 0;
+    flex: none;
+    font-size: 0.9rem;
+    width: 70px;
+    padding: 0.3rem;
+  }
+
+  .timeline-content {
+    margin: 0;
+    margin-top: 2.5rem;
+  }
+
+  .timeline-content::before {
+    left: -45px !important;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Venues Section */
+.venues {
+  background: #FAF7F2;
+}
+
+.venues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.venue-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.venue-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.venue-card h3 {
+  padding: 2rem 2rem 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #C6A769;
+}
+
+.venue-info {
+  padding: 0 2rem 1rem;
+  text-align: center;
+}
+
+.venue-info h4 {
+  margin-bottom: 0.5rem;
+  color: #3A3A3A;
+}
+
+.venue-info p {
+  color: #666;
+}
+
+.map-container {
+  height: 200px;
+  overflow: hidden;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  margin: 1rem;
+}
+
+.btn-primary {
+  background: #C6A769;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  background: #b89956;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(198, 167, 105, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #C6A769;
+  border: 2px solid #C6A769;
+}
+
+.btn-outline:hover {
+  background: #C6A769;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Save Date Section */
+.save-date {
+  background: #E8CFCF;
+  text-align: center;
+}
+
+.save-date-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.calendar-options {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  display: none;
+  min-width: 250px;
+  z-index: 1000;
+}
+
+.calendar-options.show {
+  display: block;
+  animation: fadeInCenter 0.3s ease;
+}
+
+@keyframes fadeInCenter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Backdrop for calendar dropdown */
+.calendar-options.show::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+.calendar-option {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  color: #3A3A3A;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  background: none;
+  border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.calendar-option:hover {
+  background: #F5EFE8;
+  transform: translateX(5px);
+}
+
+/* Quote Section */
+.quote {
+  background: #FAF7F2;
+  text-align: center;
+}
+
+.quote-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-style: italic;
+  color: #3A3A3A;
+  margin: 2rem 0;
+  line-height: 1.6;
+}
+
+.heart-decoration {
+  margin-top: 2rem;
+  color: #E8CFCF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* FAQ Section */
+.faq {
+  background: #F5EFE8;
+}
+
+.faq-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: white;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1.5rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #3A3A3A;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+  color: #C6A769;
+}
+
+.faq-toggle {
+  font-size: 1.5rem;
+  color: #C6A769;
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-toggle {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.7s ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 200px;
+}
+
+.faq-answer p {
+  padding: 0 1.5rem 1.5rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Contact Section */
+.contact {
+  background: #FAF7F2;
+  text-align: center;
+}
+
+.contact-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  margin: 3rem 0;
+}
+
+.contact-person {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-person:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.contact-person h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #C6A769;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  font-size: 1rem;
+}
+
+.contact-icon {
+  margin-right: 1rem;
+  color: #C6A769;
+  display: flex;
+  align-items: center;
+}
+
+.contact-text {
+  color: #666;
+}
+
+/* Footer */
+.footer {
+  background: #3A3A3A;
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.footer-line {
+  width: 100px;
+  height: 1px;
+  background: #C6A769;
+  margin: 0 auto 1rem;
+}
+
+.footer-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem;
+}
+
+.footer-text {
+  font-size: 1.1rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.footer-heart {
+  color: #C6A769;
+}
+
+/* Scroll Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .venues-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .countdown-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .countdown-item {
+    padding: 1.5rem;
+  }
+
+  .hero-names {
+    font-size: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .timeline-content {
+    padding: 1.5rem;
+  }
+
+  .venue-card h3 {
+    padding: 1.5rem 1.5rem 0.5rem;
+  }
+
+  .venue-info {
+    padding: 0 1.5rem 1rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* Wedding-style links */
+.wedding-page a {
+  color: #C6A769;
+  text-decoration: none;
+  position: relative;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.wedding-page a:hover {
+  color: #b89956;
+}
+
+/* Subtle ribbon-style underline */
+.wedding-page a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C6A769, transparent);
+  transform: translateX(-50%) scaleX(0);
+  transition: transform 0.3s ease;
+  border-radius: 2px;
+}
+
+.wedding-page a:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Optional small heart on hover */
+.wedding-page a:hover::before {
+  content: '♥';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #E8CFCF;
+  animation: heartFloat 0.6s ease forwards;
+}
+
+@keyframes heartFloat {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 5px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
