@@ -14,7 +14,7 @@ const WeddingPage = () => {
   // Countdown Timer - do godziny 17:00 (ceremonia)
   useEffect(() => {
     const updateCountdown = () => {
-      const weddingDate = new Date('2027-04-24T17:00:00');
+      const weddingDate = new Date('2027-04-24T18:00:00');
       const now = new Date();
       const difference = weddingDate - now;
 
